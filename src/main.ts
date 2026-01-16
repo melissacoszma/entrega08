@@ -1,3 +1,7 @@
+
 import "./style.css";
 
-console.log("Hello Typescript!");
+
+import "./concepto-2.ts";
+import "./concepto-4";
+

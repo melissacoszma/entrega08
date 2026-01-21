@@ -60,39 +60,42 @@ h2 {
   margin-bottom: 3rem;
 }
 
-.carta, .cartadiptico{
+.cartadiptico{
   width: 9rem;
   height: 10rem;
+  background-color: #87CEEB;
+  border-radius: 1rem; 
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   text-align: center;
   position: relative;
-  cursor: pointer;
-}
-
-.dorsocarta, .reversocarta {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
 }
 
 .fondoemoji{
-  background-color: #ffffff;
   width: 9rem;
   height: 10rem;
+  background-color: #87CEEB;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  cursor: pointer;
 }
 
-.dorsocarta {
-  background-color: #87CEEB; 
+.fondoemoji img{
+  display: none;
 }
+
+.fondoemoji:has(img[src]:not([src=""])) {
+  background-color: #ffffff; 
+}
+
+.fondoemoji img[src]:not([src=""]) {
+  display: block;
+}
+
 
 /* .boton{
    margin: 0 auto;

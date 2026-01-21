@@ -1,39 +1,31 @@
 import "./style.css";
 
 
-const cartas = document.querySelectorAll(".cartadiptico"); //crea un "array" con los elementos que compartan la clase desde el css
 
 
 
+const mostrarCartaPC4 = (urlImage: string, elementoImagenId: string) => {
+    const elementoImagen = document.getElementById(elementoImagenId);
 
-cartas.forEach((carta) => { //con foreach recorre cada elemento
-  // y encuentra su dorso y reverso
-  const dorso = carta.querySelector(".dorsocarta") as HTMLDivElement;
-  const reverso = carta.querySelector(".reversocarta") as HTMLDivElement;
-  
-  
-  // event listener para cada carta por separado, detro del foreach
-  carta.addEventListener("click", () => {
-
-    if (dorso.style.display === "block") {
-      dorso.style.display = "none";
-      reverso.style.display = 'block';
-    } else {
-      dorso.style.display = "block";
-      reverso.style.display = "none";
+    
+    if (elementoImagen !== null && elementoImagen !== undefined && elementoImagen instanceof HTMLImageElement) {
+        elementoImagen.src = urlImage;
     }
-  });
-  
-  // indicamos como inicia en este caso DENTRO del foreach ya que es donde estan declarados dorso y reverso, si lo hacemos fuera hay que volver a meter un foreach y volver a declarar(hariamos el mismo recorrido dos veces)
-  dorso.style.display = "block";
-  reverso.style.display = "none";
-});
+}
 
 
+const divCarta1 = document.getElementById("divconcepto4-1");
+const divCarta2 = document.getElementById("divconcepto4-2");
 
 
+if (divCarta1 !== null && divCarta1 !== undefined && divCarta1 instanceof HTMLDivElement) {
+    divCarta1.addEventListener('click', () => {
+        mostrarCartaPC4('https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/memo/6.png', "carta-imagen13");
+    });
+}
 
-// PROBLEMAS A LO LARGO DEL PROCESO
-
-//  1. El esqueleto de la prueba de concepto 1 no se puede implementar en la 3. Los selectores usados en ese caso cogen unicamente el primer elemento que encuentran.
-//  2. AddEventListener no puede usarse para NodeList (el array que se genera con este selector) hay que usarlo de forma INDIVIDUAL para cada elemento
+if (divCarta2 !== null && divCarta2 !== undefined && divCarta2 instanceof HTMLDivElement) {
+    divCarta2.addEventListener('click', () => {
+        mostrarCartaPC4('https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/memo/2.png', "carta-imagen14");
+    });
+}

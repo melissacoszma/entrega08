@@ -1,11 +1,8 @@
 # typescript-sandbox
 
-Para la parte de cada módulo en la que te planteamos ejercicios con JavaScript puedes usar este sandbox.
+Opciones:
 
-Pasos:
+- src contiene todo lo relacionado con las pruebas de concepto de este apartado (ejecuta npm run dev con normalidad)
+- srcAPLICACION contiene unicamente la parte final de la aplicación memoria (ejecuta npm run dev:app para visualizar elpuerto  de esta sección) 
 
-- Clonate el proyecto.
-- Instala las dependencias con `npm install`.
-- Ejecuta el sandbox con `npm run dev`.
-- Abre el navegador en `http://localhost:5173/` (si ese puerto no te funciona, mira en la consola donde has hecho el build, puede que este ocupado y se haya abierto en otro puerto).
-- Puedes empezar a meter tu código en el fichero:
+Gracias c:

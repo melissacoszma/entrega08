@@ -4,11 +4,23 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+
+    "dev": "vite",                    
+    "build": "tsc && vite build",    
+    "preview": "vite preview",         
+    
+
+    "dev:app": "vite --config vite.aplicacion.config.ts",      
+    "build:app": "tsc && vite build --config vite.aplicacion.config.ts",  
+    "preview:app": "vite preview --config vite.aplicacion.config.ts",     
+    
+  
+    "test": "vitest",                  
+    "coverage": "vitest run --coverage",
+    
+   
+    "test:app": "vitest --config vite.aplicacion.config.ts",
+    "coverage:app": "vitest run --config vite.aplicacion.config.ts --coverage"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",

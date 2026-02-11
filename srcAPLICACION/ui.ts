@@ -1,6 +1,5 @@
 import { 
-    tablero, 
-    cartas 
+    tablero,  
 } from "./modelo";
 
 import { 
@@ -12,16 +11,26 @@ import {
 } from "./motor";
 
 const iniciarPartida = (): void => {
-  // baraja
-  tablero.cartas = barajarCartas(cartas);
+  // resetea el estado de todas las cartas
+  tablero.cartas.forEach(carta => {
+    carta.estaVuelta = false;
+    carta.encontrada = false;
+  });
 
-  console.log("Partida iniciada");
-  console.log("Cartas barajadas:", tablero.cartas);
+  // baraja
+  tablero.cartas = barajarCartas(tablero.cartas);
+
+ /*console.log("Partida iniciada");
+  console.log("Cartas barajadas:", tablero.cartas); */
 
   // comienza la partida
   tablero.estadoPartida = "CeroCartasLevantadas";
+  
+  // resetea los índices
+  tablero.indiceCartaVolteadaA = undefined;
+  tablero.indiceCartaVolteadaB = undefined;
 
-  // pone todas las cartas boca abajo (vaciamos el src de img para que se vea mi fondo)
+  // pone todas las cartas boca abajo
   ponerCartasBocaAbajo();
 };
 
@@ -69,7 +78,7 @@ const ocultarCarta = (indice: number): void => {  // ← AHORA ESTÁ FUERA
   }
 };
 
-const clickEnCarta = (event: Event): void => {
+/* const clickEnCarta = (event: Event): void => {                                                                                                     /////////// dividir esta funcion en varias funciones más pequeñas 
   //console.log("Click detectado en carta");
 
   const fondoClickeado = event.currentTarget as HTMLDivElement;
@@ -116,5 +125,73 @@ const clickEnCarta = (event: Event): void => {
         ocultarCarta(indiceSegundaCarta);
       }, 500);
     }
+  }
+}; */
+
+// obtiene el índice de la carta desde el click
+const obtenerIndiceDesdeEvento = (evento: Event): number | null => {
+  const fondoClickeado = evento.currentTarget as HTMLDivElement;
+  const img = fondoClickeado.querySelector<HTMLImageElement>('[data-indice-array]');
+  
+  if (!img) {
+    console.error("No se encontró la imagen con data-indice-array");
+    return null;
+  }
+  
+  const indiceStr = img.dataset.indiceArray;
+
+  if (indiceStr === undefined) {
+    console.error("No se encontró data-indice-array");
+    return null;
+  }
+  
+  return parseInt(indiceStr, 10);
+};
+
+// intenta voltear una carta y mostrarla si corresponde
+const intentarVoltearCarta = (indice: number): void => {
+  const estabaVuelta = tablero.cartas[indice].estaVuelta;
+  
+  voltearLaCarta(tablero, indice);
+  
+  // muestra la carta SOLO si estaba boca abajo y ahora está vuelta
+  if (!estabaVuelta && tablero.cartas[indice].estaVuelta) {
+    mostrarCarta(indice);
+  }
+};
+
+// procesa el estado cuando hay dos cartas levantadas
+const procesarDosCartasLevantadas = (): void => {
+  const indicePrimeraCarta = tablero.indiceCartaVolteadaA!;
+  const indiceSegundaCarta = tablero.indiceCartaVolteadaB!;
+  
+  if (sonPareja(indicePrimeraCarta, indiceSegundaCarta, tablero)) {
+    parejaEncontrada(tablero, indicePrimeraCarta, indiceSegundaCarta);
+  } else {
+    manejarParejaNoencontrada(indicePrimeraCarta, indiceSegundaCarta);
+  }
+};
+
+// maneja cuando las cartas no son pareja (oculta con delay)
+const manejarParejaNoencontrada = (indicePrimera: number, indiceSegunda: number): void => {
+  setTimeout(() => {
+    parejaNoEncontrada(tablero, indicePrimera, indiceSegunda);
+    ocultarCarta(indicePrimera);
+    ocultarCarta(indiceSegunda);
+  }, 500);
+};
+
+// función principal refactorizada
+const clickEnCarta = (event: Event): void => {
+  const indice = obtenerIndiceDesdeEvento(event);
+  
+  if (indice === null) {
+    return;
+  }
+  
+  intentarVoltearCarta(indice);
+  
+  if (tablero.estadoPartida === "DosCartasLevantadas") {
+    procesarDosCartasLevantadas();
   }
 };

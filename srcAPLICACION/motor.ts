@@ -71,7 +71,7 @@ const sePuedeVoltearLaCarta = (tablero: Tablero, indice: number): boolean => {
   }
 };
 
-export const voltearLaCarta = (tablero: Tablero, indice: number): void => {
+export const voltearLaCarta = (tablero: Tablero, indice: number): void => {              // logica inversa comprobar y volvtear en ves de comprobar una vez se intente voltear -- click comprueba y voltea en vez de click intentando voltear - comprueba -  voltea
   // verifica que se pueda voltear
   if (!sePuedeVoltearLaCarta(tablero, indice)) {  // si NO se puede voltear
     return; // sale sin hacer nada para no recorrer los pasos siguientes hasta averiguarlo

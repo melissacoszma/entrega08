@@ -10,22 +10,7 @@ const vitestConfig: VitestUserConfigInterface = {
 };
 
 export default defineConfig({
+  root: 'src',
   plugins: [checker({ typescript: true })],
   test: vitestConfig.test,
- 
-  root: "src",
-  
-  build: {
-    outDir: "../dist",  
-    emptyOutDir: true,
-  },
-  
-  server: {
-    open: true,  
-    port: 3000,
-  },
-  
-  preview: {
-    port: 4173,
-  }
 });

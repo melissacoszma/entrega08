@@ -1,5 +1,6 @@
 import "./style.css";
 
+console.log("Hello Typescript! prueba 2");
 
 /*
 
